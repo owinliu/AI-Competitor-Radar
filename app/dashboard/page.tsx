@@ -1,6 +1,5 @@
 import { getAllReports, getReportBySlug } from "@/lib/reports";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import ReportInsightPanel from "@/components/report-insight-panel";
 
 export default function DashboardPage() {
   const reports = getAllReports();
@@ -25,13 +24,17 @@ export default function DashboardPage() {
 
       {latest && (
         <section className="rounded-xl border bg-card p-6">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">最新报告（原文展开）</p>
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">最新报告（筛选联动）</p>
           <h2 className="mt-2 text-xl font-semibold">{latest.title}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{latest.summary}</p>
 
-          <article className="prose mt-5 max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{latest.content}</ReactMarkdown>
-          </article>
+          {latest.insights.length > 0 ? (
+            <div className="mt-5">
+              <ReportInsightPanel insights={latest.insights} />
+            </div>
+          ) : (
+            <p className="mt-4 text-sm text-muted-foreground">该报告暂无结构化 insights，暂无法筛选联动。</p>
+          )}
         </section>
       )}
     </div>
