@@ -1,16 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu, LayoutDashboard, FileText, ImageIcon, Settings } from "lucide-react";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
 const mainNav = [
-  { href: "/dashboard", label: "仪表盘" },
-  { href: "/reports", label: "周报中心" },
-  { href: "/evidence", label: "证据库" },
-  { href: "/settings", label: "配置" },
+  { href: "/dashboard", label: "仪表盘", icon: LayoutDashboard },
+  { href: "/reports", label: "周报中心", icon: FileText },
+  { href: "/evidence", label: "证据库", icon: ImageIcon },
+  { href: "/settings", label: "配置", icon: Settings },
 ];
 
 const secondNav = [
@@ -37,11 +37,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <SheetContent side="left" className="w-72">
                 <SheetHeader><SheetTitle>导航</SheetTitle></SheetHeader>
                 <div className="mt-3 flex flex-col gap-1 px-4">
-                  {mainNav.map((item) => (
-                    <Link key={item.href} href={item.href} className={`rounded-md px-3 py-2 text-sm ${pathname.startsWith(item.href) ? "bg-muted font-medium" : "text-muted-foreground"}`}>
-                      {item.label}
-                    </Link>
-                  ))}
+                  {mainNav.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link key={item.href} href={item.href} className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm whitespace-nowrap ${pathname.startsWith(item.href) ? "bg-muted font-medium" : "text-muted-foreground"}`}>
+                        <Icon className="size-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </SheetContent>
             </Sheet>
@@ -54,15 +58,22 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       <div className="grid min-h-[calc(100vh-56px)] grid-cols-1 md:grid-cols-[220px_220px_1fr]">
         <aside className="hidden border-r bg-background md:block p-3">
-          <NavigationMenu>
-            <NavigationMenuList className="flex-col items-stretch gap-1">
-              {mainNav.map((item) => (
-                <NavigationMenuItem key={item.href}>
-                  <NavigationMenuLink render={<Link href={item.href} />} className={pathname.startsWith(item.href) ? "bg-muted font-medium" : ""}>
-                    {item.label}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
+          <NavigationMenu className="w-full max-w-none justify-start">
+            <NavigationMenuList className="flex-col items-stretch gap-1 w-full">
+              {mainNav.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <NavigationMenuItem key={item.href}>
+                    <NavigationMenuLink
+                      render={<Link href={item.href} />}
+                      className={pathname.startsWith(item.href) ? "bg-muted font-medium" : ""}
+                    >
+                      <Icon className="size-4" />
+                      <span className="whitespace-nowrap">{item.label}</span>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
         </aside>
