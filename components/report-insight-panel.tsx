@@ -155,7 +155,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
               const needReview = `${x.confidence}`.includes("是");
               return (
                 <tr key={x.id}>
-                  <td className="border-b border-slate-100 px-3 py-3">{x.competitor}</td>
+                  <td className="border-b border-slate-100 px-3 py-3 whitespace-nowrap min-w-[6em] w-[6em]">{x.competitor}</td>
                   <td className="border-b border-slate-100 px-3 py-3">{displayLabel(x.dimension)}</td>
                   <td className="border-b border-slate-100 px-3 py-3">{x.page || "-"}</td>
                   <td className="border-b border-slate-100 px-3 py-3 max-w-[280px]">{x.conclusion}</td>
