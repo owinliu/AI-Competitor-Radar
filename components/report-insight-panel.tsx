@@ -12,9 +12,9 @@ function group(title: string, arr: string[], value: string, onChange: (v: string
   return (
     <div>
       <p className="mb-2 text-xs text-muted-foreground">{title}</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-nowrap gap-2">
         {arr.map((x) => (
-          <Button key={x} size="sm" variant={x === value ? "default" : "outline"} onClick={() => onChange(x)}>{displayLabel(x)}</Button>
+          <Button key={x} size="sm" className="whitespace-nowrap" variant={x === value ? "default" : "outline"} onClick={() => onChange(x)}>{displayLabel(x)}</Button>
         ))}
       </div>
     </div>
@@ -113,11 +113,11 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
   return (
     <section className="rounded-xl border bg-card p-5 space-y-4">
       <h2 className="text-lg font-semibold">动态结论面板（按筛选联动）</h2>
-      <div className="grid gap-3 md:grid-cols-[1fr_2fr_1fr_1fr]">
+      <div className="grid gap-3 md:grid-cols-[2fr_2fr_1fr_1fr]">
         {group("竞品", competitors, competitor, setCompetitor)}
         {group("维度", dimensions, dimension, setDimension)}
         {group("周期", periods, period, setPeriod)}
-        <div className="md:text-right md:justify-self-end md:max-w-[220px]">
+        <div className="md:text-right md:justify-self-end">
           {group("变化范围", ["显著变化", "全部"], changeScope, (v) => setChangeScope(v as "显著变化" | "全部"))}
         </div>
       </div>
