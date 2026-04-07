@@ -1,4 +1,6 @@
 import { getAllReports, getReportBySlug } from "@/lib/reports";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function DashboardPage() {
   const reports = getAllReports();
@@ -9,7 +11,7 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <section className="rounded-xl border bg-card p-6">
         <h1 className="text-2xl font-semibold">竞品追踪工作台</h1>
-        <p className="mt-2 text-sm text-muted-foreground">主区直接展示最新报告重点内容，减少二次点击。</p>
+        <p className="mt-2 text-sm text-muted-foreground">主区直接展示最新报告原文，减少二次点击。</p>
       </section>
 
       <section className="grid gap-4 md:grid-cols-4">
@@ -23,24 +25,13 @@ export default function DashboardPage() {
 
       {latest && (
         <section className="rounded-xl border bg-card p-6">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">最新报告</p>
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">最新报告（原文展开）</p>
           <h2 className="mt-2 text-xl font-semibold">{latest.title}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{latest.summary}</p>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div>
-              <h3 className="text-sm font-semibold">结论先行</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground">
-                {latest.highlights.slice(0, 4).map((x) => <li key={x}>{x}</li>)}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold">行动建议</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-foreground">
-                {latest.actions.slice(0, 4).map((x) => <li key={x}>{x}</li>)}
-              </ul>
-            </div>
-          </div>
+          <article className="prose mt-5 max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{latest.content}</ReactMarkdown>
+          </article>
         </section>
       )}
     </div>
