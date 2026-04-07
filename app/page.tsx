@@ -8,21 +8,21 @@ export default function HomePage() {
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
-      <section className="rounded-2xl border border-border bg-card p-8">
-        <p className="text-sm text-accent">AI Competitor Radar</p>
-        <h1 className="mt-2 text-3xl font-bold">竞品分析报告中心</h1>
-        <p className="mt-3 max-w-3xl text-sm text-muted">
-          统一输出“结论先行 + 证据对比 + 行动建议”的可读报告页面。飞书持续同步，网页用于展示与复盘。
+      <section className="hero-glow glass rounded-3xl p-8 md:p-10">
+        <p className="text-xs uppercase tracking-[0.2em] text-accent">Competitor Intelligence</p>
+        <h1 className="mt-3 text-3xl font-semibold md:text-5xl">竞品追踪雷达报告中心</h1>
+        <p className="mt-4 max-w-3xl text-sm text-muted md:text-base">
+          用管理层可读的网页交互呈现：结论先行、证据对照、影响评估、动作建议。
         </p>
       </section>
 
       <div className="mt-8 grid gap-4">
         {reports.map((report) => (
           <Link key={report.slug} href={`/reports/${report.slug}`}>
-            <Card className="transition hover:-translate-y-0.5 hover:border-accent">
+            <Card className="glass rounded-2xl transition duration-200 hover:-translate-y-0.5 hover:border-accent">
               <CardHeader>
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <CardTitle>{report.title}</CardTitle>
+                  <CardTitle className="text-xl">{report.title}</CardTitle>
                   <Badge>{report.date}</Badge>
                 </div>
               </CardHeader>

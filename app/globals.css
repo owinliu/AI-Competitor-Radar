@@ -2,6 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #070b14;
+  --bg-soft: #0d1424;
+  --card: rgba(18, 27, 48, 0.75);
+  --text: #e9efff;
+  --muted: #99a8c7;
+  --line: rgba(137, 163, 255, 0.22);
+  --accent: #7ea2ff;
+  --accent2: #8df0cc;
+}
+
+* { box-sizing: border-box; }
+
 body {
-  @apply bg-background text-foreground;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(126,162,255,.28), transparent 55%),
+    radial-gradient(1000px 500px at 90% -20%, rgba(141,240,204,.2), transparent 60%),
+    linear-gradient(180deg, #060a12 0%, #0a1222 100%);
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.hero-glow {
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow::after {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 280px;
+  background: radial-gradient(closest-side, rgba(126,162,255,.35), transparent 70%);
+  pointer-events: none;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.45;
+  display: block;
+  overflow-x: auto;
+}
+.prose thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(13, 20, 36, 0.98);
+  color: #dce7ff;
+  border: 1px solid var(--line);
+  padding: 10px 8px;
+  white-space: nowrap;
+}
+.prose td {
+  border: 1px solid var(--line);
+  padding: 10px 8px;
+  vertical-align: top;
+  min-width: 120px;
+}
+.prose tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+.prose img {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
 }
