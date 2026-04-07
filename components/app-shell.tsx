@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const mainNav = [
   { href: "/dashboard", label: "仪表盘", icon: LayoutDashboard },
-  { href: "/dashboard", label: "周报中心", icon: FileText },
+  { href: "/reports", label: "周报中心", icon: FileText },
   { href: "/evidence", label: "证据库", icon: ImageIcon },
   { href: "/settings", label: "配置", icon: Settings },
 ];
@@ -49,7 +49,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <div className="grid min-h-[calc(100vh-56px)] grid-cols-1 md:grid-cols-[220px_1fr]">
-        <aside className="hidden border-r bg-background p-3 md:block md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto">
+        <aside className="hidden border-r bg-background p-3 md:block md:sticky md:top-14 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto">
           <NavigationMenu className="w-full max-w-none justify-start">
             <NavigationMenuList className="flex w-full flex-col items-stretch gap-1">
               {mainNav.map((item) => {
