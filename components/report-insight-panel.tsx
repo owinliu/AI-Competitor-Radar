@@ -48,8 +48,11 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     if (dimension !== "全部" && x.dimension !== dimension) return false;
     if (period !== "全部" && x.period !== period) return false;
     if (changeScope === "显著变化") {
-      const isSmall = /变化不大|基本一致|未见主流程重构/.test(`${x.conclusion}${x.compare || ""}`);
-      if (isSmall && x.impact !== "高" && !`${x.confidence}`.includes("是")) return false;
+      const text = `${x.conclusion}${x.compare || ""}`;
+      const isSmall = /变化不大|基本一致|整体稳定|省略详细过程|主链路稳定/.test(text);
+      const isStrongSignal = /显著|明显|新增|强化|增强|加码/.test(text);
+      if (isSmall) return false;
+      if (!(x.impact === "高" || isStrongSignal)) return false;
     }
     return true;
   }), [insights, competitor, dimension, period, changeScope]);
