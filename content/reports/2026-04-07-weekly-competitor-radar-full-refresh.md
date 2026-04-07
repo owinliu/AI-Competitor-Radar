@@ -173,9 +173,11 @@ insights:
 ## 全量读取范围与底稿
 
 - 全量读取图片：56 张（分期乐 29，度小满金融 27）
-- 逐图台账：`/Users/owinliu/Desktop/竞品分析/outputs/image-ledger-20260407-1642.md`
+- 逐图台账（原始全量）：`/Users/owinliu/Desktop/竞品分析/outputs/image-ledger-20260407-1642.md`
+- 逐图台账（精进版）：`/Users/owinliu/Desktop/竞品分析/outputs/per-image-ledger-reviewed-20260407-1648.md`
 - 对比映射：`/Users/owinliu/Desktop/竞品分析/outputs/comparison-map-20260407-1642.md`
 - 缺口优先级：`/Users/owinliu/Desktop/竞品分析/outputs/gap-priority-20260407-1642.md`
+- 质量快照：`/Users/owinliu/Desktop/竞品分析/outputs/analysis-quality-snapshot-20260407-1648.md`
 - 高优先缺口：两家风控（0323/0402均缺）、度小满客服0402缺失
 
 ## 结构化主表（按固定表头）
