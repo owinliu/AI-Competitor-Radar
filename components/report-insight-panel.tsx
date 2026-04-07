@@ -23,6 +23,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
   const [competitor, setCompetitor] = useState("全部");
   const [dimension, setDimension] = useState("全部");
   const [period, setPeriod] = useState("全部");
+  const [changeScope, setChangeScope] = useState<"显著变化" | "全部">("显著变化");
 
   const [viewerOpen, setViewerOpen] = useState(false);
   const [viewerImages, setViewerImages] = useState<ViewerImage[]>([]);
@@ -41,15 +42,19 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     if (competitor !== "全部" && x.competitor !== competitor) return false;
     if (dimension !== "全部" && x.dimension !== dimension) return false;
     if (period !== "全部" && x.period !== period) return false;
+    if (changeScope === "显著变化") {
+      const isSmall = /变化不大|基本一致|未见主流程重构/.test(`${x.conclusion}${x.compare || ""}`);
+      if (isSmall && x.impact !== "高" && !`${x.confidence}`.includes("是")) return false;
+    }
     return true;
-  }), [insights, competitor, dimension, period]);
+  }), [insights, competitor, dimension, period, changeScope]);
 
   const layeredConclusion = useMemo(() => {
     if (competitor === "全部" && dimension === "全部" && period === "全部") {
       return `全局结论：当前报告共 ${insights.length} 条有效洞察。`;
     }
-    return `交叉结论（${competitor}/${dimension}/${period}）：命中 ${filtered.length} 条洞察。`;
-  }, [competitor, dimension, period, filtered.length, insights.length]);
+    return `交叉结论（${competitor}/${dimension}/${period}/${changeScope}）：命中 ${filtered.length} 条洞察。`;
+  }, [competitor, dimension, period, changeScope, filtered.length, insights.length]);
 
   const openViewer = (images: ViewerImage[], idx: number) => {
     if (images.length === 0) return;
@@ -64,10 +69,11 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
   return (
     <section className="rounded-xl border bg-card p-5 space-y-4">
       <h2 className="text-lg font-semibold">动态结论面板（按筛选联动）</h2>
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid gap-3 md:grid-cols-4">
         {group("竞品", competitors, competitor, setCompetitor)}
         {group("维度", dimensions, dimension, setDimension)}
         {group("周期", periods, period, setPeriod)}
+        {group("变化范围", ["显著变化", "全部"], changeScope, (v) => setChangeScope(v as "显著变化" | "全部"))}
       </div>
 
       <div className="rounded-lg border bg-muted/30 p-3 text-sm">
