@@ -16,10 +16,16 @@ function group(title: string, arr: string[], value: string, onChange: (v: string
   );
 }
 
+type ViewerImage = { src: string; label: string };
+
 export default function ReportInsightPanel({ insights }: { insights: Insight[] }) {
   const [competitor, setCompetitor] = useState("全部");
   const [dimension, setDimension] = useState("全部");
   const [period, setPeriod] = useState("全部");
+
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerImages, setViewerImages] = useState<ViewerImage[]>([]);
+  const [viewerIndex, setViewerIndex] = useState(0);
 
   const competitors = ["全部", ...Array.from(new Set(insights.map((x) => x.competitor)))];
   const dimensions = ["全部", ...Array.from(new Set(insights.map((x) => x.dimension)))];
@@ -38,6 +44,16 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     }
     return `交叉结论（${competitor}/${dimension}/${period}）：命中 ${filtered.length} 条洞察。`;
   }, [competitor, dimension, period, filtered.length, insights.length]);
+
+  const openViewer = (images: ViewerImage[], idx: number) => {
+    if (images.length === 0) return;
+    setViewerImages(images);
+    setViewerIndex(idx);
+    setViewerOpen(true);
+  };
+
+  const nextImage = () => setViewerIndex((i) => (i + 1) % viewerImages.length);
+  const prevImage = () => setViewerIndex((i) => (i - 1 + viewerImages.length) % viewerImages.length);
 
   return (
     <section className="rounded-xl border bg-card p-5 space-y-4">
@@ -68,32 +84,64 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
             </tr>
           </thead>
           <tbody>
-            {filtered.map((x) => (
-              <tr key={x.id}>
-                <td className="border-b border-slate-100 px-3 py-3">{x.competitor}</td>
-                <td className="border-b border-slate-100 px-3 py-3">{x.dimension}</td>
-                <td className="border-b border-slate-100 px-3 py-3">{x.page || "-"}</td>
-                <td className="border-b border-slate-100 px-3 py-3 max-w-[280px]">{x.conclusion}</td>
-                <td className="border-b border-slate-100 px-3 py-3">
-                  {x.prevEvidence && x.prevEvidence.length > 0 ? x.prevEvidence.map((src) => (
-                    <img key={src} src={src} alt={src} className="h-16 w-24 rounded border object-cover" />
-                  )) : <span className="text-xs text-muted-foreground">无</span>}
-                </td>
-                <td className="border-b border-slate-100 px-3 py-3">
-                  {x.currEvidence && x.currEvidence.length > 0 ? x.currEvidence.map((src) => (
-                    <img key={src} src={src} alt={src} className="h-16 w-24 rounded border object-cover" />
-                  )) : <span className="text-xs text-muted-foreground">无</span>}
-                </td>
-                <td className="border-b border-slate-100 px-3 py-3 max-w-[320px]">{x.compare || "-"}</td>
-                <td className="border-b border-slate-100 px-3 py-3">{x.impact}</td>
-                <td className="border-b border-slate-100 px-3 py-3">{x.confidence}</td>
-              </tr>
-            ))}
+            {filtered.map((x) => {
+              const prevImgs = (x.prevEvidence || []).map((src) => ({ src, label: "上期" }));
+              const currImgs = (x.currEvidence || []).map((src) => ({ src, label: "本期" }));
+              const allImgs = [...prevImgs, ...currImgs];
+              return (
+                <tr key={x.id}>
+                  <td className="border-b border-slate-100 px-3 py-3">{x.competitor}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">{x.dimension}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">{x.page || "-"}</td>
+                  <td className="border-b border-slate-100 px-3 py-3 max-w-[280px]">{x.conclusion}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">
+                    <div className="flex flex-wrap gap-2">
+                      {prevImgs.length > 0 ? prevImgs.map((img) => {
+                        const idx = allImgs.findIndex((i) => i.src === img.src);
+                        return (
+                          <button key={img.src} onClick={() => openViewer(allImgs, idx)} className="rounded border p-1 hover:bg-slate-50" type="button">
+                            <img src={img.src} alt={img.src} className="h-24 w-16 rounded object-cover" />
+                          </button>
+                        );
+                      }) : <span className="text-xs text-muted-foreground">无</span>}
+                    </div>
+                  </td>
+                  <td className="border-b border-slate-100 px-3 py-3">
+                    <div className="flex flex-wrap gap-2">
+                      {currImgs.length > 0 ? currImgs.map((img) => {
+                        const idx = allImgs.findIndex((i) => i.src === img.src);
+                        return (
+                          <button key={img.src} onClick={() => openViewer(allImgs, idx)} className="rounded border p-1 hover:bg-slate-50" type="button">
+                            <img src={img.src} alt={img.src} className="h-24 w-16 rounded object-cover" />
+                          </button>
+                        );
+                      }) : <span className="text-xs text-muted-foreground">无</span>}
+                    </div>
+                  </td>
+                  <td className="border-b border-slate-100 px-3 py-3 max-w-[320px]">{x.compare || "-"}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">{x.impact}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">{x.confidence}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
       {filtered.length === 0 && <p className="text-sm text-muted-foreground">当前筛选条件下暂无匹配数据。</p>}
+
+      {viewerOpen && viewerImages.length > 0 && (
+        <div className="fixed inset-0 z-50 bg-black/75" onClick={() => setViewerOpen(false)}>
+          <div className="mx-auto flex h-full max-w-5xl items-center justify-center px-4" onClick={(e) => e.stopPropagation()}>
+            <button type="button" onClick={prevImage} className="mr-3 rounded bg-white/90 px-3 py-2 text-sm">上一张</button>
+            <div className="rounded bg-white p-3">
+              <div className="mb-2 text-center text-xs text-slate-500">{viewerImages[viewerIndex]?.label}（{viewerIndex + 1}/{viewerImages.length}）</div>
+              <img src={viewerImages[viewerIndex]?.src} alt="preview" className="max-h-[80vh] max-w-[70vw] rounded object-contain" />
+            </div>
+            <button type="button" onClick={nextImage} className="ml-3 rounded bg-white/90 px-3 py-2 text-sm">下一张</button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
