@@ -84,9 +84,9 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
               <th className="border-b border-slate-200 px-3 py-2">结论</th>
               <th className="border-b border-slate-200 px-3 py-2">0323截图（上期）</th>
               <th className="border-b border-slate-200 px-3 py-2">0402截图（本期）</th>
-              <th className="border-b border-slate-200 px-3 py-2">对比过程（详细）</th>
+              <th className="border-b border-slate-200 px-3 py-2">对比过程（仅变化明显时展示）</th>
               <th className="border-b border-slate-200 px-3 py-2">影响等级</th>
-              <th className="border-b border-slate-200 px-3 py-2">置信度/复核</th>
+              <th className="border-b border-slate-200 px-3 py-2">是否建议人工复核</th>
             </tr>
           </thead>
           <tbody>
@@ -94,6 +94,8 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
               const prevImgs = (x.prevEvidence || []).map((src) => ({ src, label: "上期" }));
               const currImgs = (x.currEvidence || []).map((src) => ({ src, label: "本期" }));
               const allImgs = [...prevImgs, ...currImgs];
+              const smallChange = /稳定|变化不大|未见明显变化|基本一致/.test(`${x.conclusion}${x.compare || ""}`);
+              const needReview = `${x.confidence}`.includes("是");
               return (
                 <tr key={x.id}>
                   <td className="border-b border-slate-100 px-3 py-3">{x.competitor}</td>
@@ -124,9 +126,9 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                       }) : <span className="text-xs text-muted-foreground">无</span>}
                     </div>
                   </td>
-                  <td className="border-b border-slate-100 px-3 py-3 max-w-[320px]">{x.compare || "-"}</td>
+                  <td className="border-b border-slate-100 px-3 py-3 max-w-[320px]">{smallChange ? "（变化不大，省略详细过程）" : (x.compare || "-")}</td>
                   <td className="border-b border-slate-100 px-3 py-3">{x.impact}</td>
-                  <td className="border-b border-slate-100 px-3 py-3">{x.confidence}</td>
+                  <td className="border-b border-slate-100 px-3 py-3">{needReview ? "是（建议人工复核）" : "否"}</td>
                 </tr>
               );
             })}
