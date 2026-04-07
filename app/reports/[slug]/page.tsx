@@ -60,21 +60,25 @@ export default function ReportPage({ params }: { params: { slug: string } }) {
         {report.insights.length > 0 && <ReportInsightPanel insights={report.insights} />}
 
         <section className="rounded-xl border bg-card p-6">
-          <h2 className="text-lg font-semibold">结构化主表与详细分析</h2>
-          <article className="prose mt-4 max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h2: ({ children }) => {
-                  const text = String(children);
-                  const id = `sec-${slugify(text)}`;
-                  return <h2 id={id}>{children}</h2>;
-                },
-              }}
-            >
-              {report.content}
-            </ReactMarkdown>
-          </article>
+          <h2 className="text-lg font-semibold">原始全文（可选）</h2>
+          <p className="mt-1 text-sm text-muted-foreground">默认优先看上方“动态结论面板”的筛选结果；原始全文仅作审阅与校对。</p>
+          <details className="mt-4 rounded-lg border p-4">
+            <summary className="cursor-pointer text-sm font-medium">点击展开原始全文</summary>
+            <article className="prose mt-4 max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h2: ({ children }) => {
+                    const text = String(children);
+                    const id = `sec-${slugify(text)}`;
+                    return <h2 id={id}>{children}</h2>;
+                  },
+                }}
+              >
+                {report.content}
+              </ReactMarkdown>
+            </article>
+          </details>
         </section>
       </div>
     </div>
