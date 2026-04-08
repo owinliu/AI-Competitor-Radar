@@ -1,5 +1,9 @@
-import { redirect } from "next/navigation";
+import { getAllReports } from "@/lib/reports";
 
-export default function ReportPage() {
-  redirect("/dashboard");
+export function generateStaticParams() {
+  return getAllReports().map((r) => ({ slug: r.slug }));
+}
+
+export default function ReportSlugFallbackPage() {
+  return null;
 }

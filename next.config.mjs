@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'standalone'
-}
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 
-export default nextConfig
+const nextConfig = {
+  output: isGithubActions ? "export" : "standalone",
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
+};
+
+export default nextConfig;
