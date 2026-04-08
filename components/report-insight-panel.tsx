@@ -38,6 +38,12 @@ function impactChipClass(impact: "高" | "中" | "低") {
   return "bg-slate-100 text-slate-700 border border-slate-200";
 }
 
+function impactTextClass(impact: "高" | "中" | "低") {
+  if (impact === "高") return "text-red-700";
+  if (impact === "中") return "text-amber-700";
+  return "text-slate-600";
+}
+
 type ViewerImage = { src: string; label: string };
 
 export default function ReportInsightPanel({ insights }: { insights: Insight[] }) {
@@ -141,7 +147,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                 <table className="w-full min-w-[900px] border-collapse text-sm">
                   <thead>
                     <tr className="bg-slate-50 text-left text-slate-600">
-                      <th className="border-b border-slate-200 px-3 py-2">维度</th>
+                      <th className="border-b border-slate-200 px-3 py-2 whitespace-nowrap w-[88px]">维度</th>
                       <th className="border-b border-slate-200 px-3 py-2">分期乐</th>
                       <th className="border-b border-slate-200 px-3 py-2">度小满</th>
                       <th className="border-b border-slate-200 px-3 py-2">安逸花</th>
@@ -152,7 +158,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                   <tbody>
                     {crossDimRows.map(({ dim, byCompetitor }) => (
                       <tr key={dim}>
-                        <td className="border-b border-slate-100 px-3 py-3 font-medium">{displayLabel(dim)}</td>
+                        <td className="border-b border-slate-100 px-3 py-3 font-medium whitespace-nowrap">{displayLabel(dim)}</td>
                         {byCompetitor.map(({ competitor: c, hit }) => (
                           <td key={`${dim}-${c}`} className="border-b border-slate-100 px-3 py-3 align-top">
                             {hit ? (
@@ -177,8 +183,8 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                   <article key={comp} className="rounded-lg border bg-card/60 p-3 space-y-2">
                     <p className="text-sm font-semibold">{comp}</p>
                     {rows.map((x) => (
-                      <div key={x.id} className="text-xs text-muted-foreground">
-                        <p><span className={`inline-block rounded px-1.5 py-0.5 mr-1 ${impactChipClass(x.impact)}`}>{x.impact}</span>{displayLabel(x.dimension)} · {x.page}</p>
+                      <div key={x.id} className={`text-xs ${impactTextClass(x.impact)}`}>
+                        <p>{displayLabel(x.dimension)} · {x.page}</p>
                         <p className="line-clamp-2">{x.conclusion}</p>
                       </div>
                     ))}
