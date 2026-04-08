@@ -1419,8 +1419,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 保险
-    conclusion: 保险页结构与权益主文案基本一致，整体处于稳定态。
-    compare: 对照窗口：0323 vs 0402，入口宫格与新人健康礼包主框架未见明显变化。
+    conclusion: 保险页结构与核心权益基本一致，整体处于稳定状态。
+    compare: 对照窗口：0323 vs 0402，分类入口与主权益卡保持一致，未见关键路径变化。
     impact: 低
     confidence: 否
     actions:
@@ -1437,8 +1437,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 借钱
-    conclusion: 借钱页主流程与信息架构稳定，未见关键转化链路变动。
-    compare: 对照窗口：0323 vs 0402，额度卡、服务宫格与攻略区保持一致。
+    conclusion: 借钱页主流程与服务入口保持稳定，未见明显结构改动。
+    compare: 对照窗口：0323 vs 0402，额度卡、借款服务与攻略区块基本一致。
     impact: 低
     confidence: 否
     actions:
@@ -1455,8 +1455,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 我的
-    conclusion: 我的页账户资产区稳定，仅卡券数量等轻量运营数据有更新。
-    compare: 对照窗口：0323 vs 0402，页面结构一致，属于低影响内容刷新。
+    conclusion: 我的页框架稳定，权益数值有小幅运营更新（卡券数量提升）。
+    compare: 对照窗口：0323 vs 0402，信息架构一致，主要变化为券包与标签文案。
     impact: 低
     confidence: 否
     actions:
@@ -1473,8 +1473,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 理财
-    conclusion: 理财页主框架稳定，产品数值与货架内容有常规更新。
-    compare: 对照窗口：0323 vs 0402，布局一致，年化展示与期限产品有小幅替换。
+    conclusion: 理财页主框架稳定，产品与收益数字有轻微更新。
+    compare: 对照窗口：0323 vs 0402，理财券与核心推荐位保留，属于内容迭代。
     impact: 低
     confidence: 否
     actions:
@@ -1491,8 +1491,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 首页
-    conclusion: 首页顶部从资讯通知切换为“乘风2026”品牌活动主视觉，活动导流显著增强。
-    compare: 对照窗口：0323 vs 0402，借钱主卡稳定，但顶部banner由蓝色信息流变为红色明星活动位。
+    conclusion: 首页头图运营主题由品牌信息流切换为“王濛乘风2026”营销主题，活动露出显著增强。
+    compare: 对照窗口：0323 vs 0402，顶部视觉与首屏运营位完成主题切换，借钱主卡结构保持不变。
     impact: 高
     confidence: 否
     actions:
@@ -1509,8 +1509,8 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 对话页
-    conclusion: 对话页问答模板内容更新，咨询主题更偏借款申请与额度路径。
-    compare: 对照窗口：0323 vs 0407，聊天框架稳定，推荐问题与按钮文案发生替换。
+    conclusion: 客服对话页保持问答结构稳定，知识库问句与快捷入口有更新。
+    compare: 对照窗口：0323 vs 0407，主体版式一致，问题池和底部快捷标签调整。
     impact: 中
     confidence: 否
     actions:
@@ -1527,8 +1527,8 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 对话页初始
-    conclusion: 对话页初始状态结构稳定，问答词包按当期业务主题更新。
-    compare: 对照窗口：0323 vs 0407，入口与组件一致，首屏问题集合有替换。
+    conclusion: 对话页初始态整体稳定，底部推荐标签有替换。
+    compare: 对照窗口：0323 vs 0407，空会话页结构一致，底部推荐词从咨询类切到交易/审核类。
     impact: 中
     confidence: 否
     actions:
@@ -1545,8 +1545,8 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 消息中心
-    conclusion: 消息中心FAQ与自助服务位点有更新，服务导向更偏借款场景。
-    compare: 对照窗口：0323 vs 0407，版式不变，但问题列表和服务icon组合发生变化。
+    conclusion: 消息中心页面布局稳定，问题清单与自助服务入口组合有调整。
+    compare: 对照窗口：0323 vs 0407，蓝色头部与模块分区一致，条目内容更新。
     impact: 中
     confidence: 否
     actions:
@@ -1563,8 +1563,8 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 消息中心2
-    conclusion: 消息中心2与消息中心一致，主要是FAQ与服务快捷入口按期调整。
-    compare: 对照窗口：0323 vs 0407，未见结构改版，属于内容层更新。
+    conclusion: 消息中心二级页结构稳定，业务分类与文案保持一致。
+    compare: 对照窗口：0323 vs 0407，版式近乎一致，属于轻度维护更新。
     impact: 低
     confidence: 否
     actions:
@@ -1581,8 +1581,8 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 借钱
-    conclusion: 消金借钱页与APP借钱页一致，主借款链路保持稳定。
-    compare: 对照窗口：0323 vs 0402，额度卡、服务区、攻略区未见结构变化。
+    conclusion: 消金借钱页产品参数与流程说明保持一致，未见结构变更。
+    compare: 对照窗口：0323 vs 0402，额度卡、条款区与申请按钮均稳定。
     impact: 低
     confidence: 否
     actions:
@@ -1599,8 +1599,8 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 额度页
-    conclusion: 额度页核心展示与按钮动作稳定，暂无显著策略调整。
-    compare: 对照窗口：0323 vs 0402，参数文案与布局基本一致。
+    conclusion: 额度页核心信息架构与操作路径保持稳定。
+    compare: 对照窗口：0323 vs 0402，额度、期限、规则与CTA位置一致。
     impact: 低
     confidence: 否
     actions:
@@ -1617,8 +1617,8 @@ insights:
     dimension: 留存促活运营
     period: 2026-W15
     page: 活动落地页
-    conclusion: 0402新增“乘风2026”系列弹窗与奖励浮层，活动触达层级明显增强。
-    compare: 对照窗口：0323活动落地页 vs 0402活动落地页/弹窗/奖励浮层，活动链路从单页展示升级为多触点运营。
+    conclusion: 运营活动从“利息优惠券”落地页升级为“乘风2026”主题活动，活动氛围与奖励弹层显著增强。
+    compare: 对照窗口：0323 vs 0402，活动主视觉、奖励机制展示和弹窗触达均明显强化。
     impact: 高
     confidence: 否
     actions:
