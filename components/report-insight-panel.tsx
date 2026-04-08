@@ -102,12 +102,23 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
 
   const strategyRows = useMemo(() => {
     const competitorOrder = ["分期乐", "度小满", "安逸花", "小赢", "奇富借条"];
+    const dimOrder = ["APP", "客服", "消金", "留存促活运营", "风控"];
     return competitorOrder
       .map((c) => {
-        const rows = filtered.filter((x) => x.competitor === c).slice(0, 3);
-        return { competitor: c, rows };
+        const rows = filtered.filter((x) => x.competitor === c);
+        const byDim = dimOrder.map((d) => ({
+          dim: d,
+          hit: rows.find((x) => x.dimension === d),
+        }));
+        return {
+          competitor: c,
+          count: rows.length,
+          byDim,
+          main: rows[0],
+          summary: rows.slice(0, 2).map((x) => x.conclusion).join("；"),
+        };
       })
-      .filter((x) => x.rows.length > 0);
+      .filter((x) => x.count > 0);
   }, [filtered]);
 
   const openViewer = (images: ViewerImage[], idx: number) => {
@@ -175,20 +186,41 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
               </div>
             </div>
 
-            <div className="rounded-lg border bg-card p-4">
-              <h3 className="text-sm font-semibold mb-3">各产品策略变化对比</h3>
-              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                {strategyRows.map(({ competitor: comp, rows }) => (
-                  <article key={comp} className="rounded-lg border bg-card/60 p-3 space-y-2">
-                    <p className="text-sm font-semibold">{comp}</p>
-                    {rows.map((x) => (
-                      <div key={x.id} className={`text-xs ${impactTextClass(x.impact)}`}>
-                        <p>{displayLabel(x.dimension)} · {x.page}</p>
-                        <p className="line-clamp-2">{x.conclusion}</p>
-                      </div>
+            <div className="rounded-lg border bg-card p-4 space-y-3">
+              <h3 className="text-sm font-semibold">单产品策略解读对照（全量读图结论）</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[1200px] border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-slate-50 text-left text-slate-600">
+                      <th className="border-b border-slate-200 px-3 py-2">产品</th>
+                      <th className="border-b border-slate-200 px-3 py-2">证据覆盖度</th>
+                      <th className="border-b border-slate-200 px-3 py-2">主策略变化</th>
+                      <th className="border-b border-slate-200 px-3 py-2">APP</th>
+                      <th className="border-b border-slate-200 px-3 py-2">客服</th>
+                      <th className="border-b border-slate-200 px-3 py-2">消金</th>
+                      <th className="border-b border-slate-200 px-3 py-2">运营</th>
+                      <th className="border-b border-slate-200 px-3 py-2">风控</th>
+                      <th className="border-b border-slate-200 px-3 py-2">业务含义</th>
+                      <th className="border-b border-slate-200 px-3 py-2">一句对外总结</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {strategyRows.map(({ competitor: comp, count, byDim, main, summary }) => (
+                      <tr key={comp}>
+                        <td className="border-b border-slate-100 px-3 py-3 font-medium whitespace-nowrap">{comp}</td>
+                        <td className="border-b border-slate-100 px-3 py-3 text-xs text-muted-foreground">已纳入 {count} 个可比位点</td>
+                        <td className={`border-b border-slate-100 px-3 py-3 text-xs ${main ? impactTextClass(main.impact) : "text-muted-foreground"}`}>{main?.conclusion || "—"}</td>
+                        {byDim.map(({ dim, hit }) => (
+                          <td key={`${comp}-${dim}`} className={`border-b border-slate-100 px-3 py-3 text-xs ${hit ? impactTextClass(hit.impact) : "text-muted-foreground"}`}>
+                            {hit?.conclusion || "—"}
+                          </td>
+                        ))}
+                        <td className="border-b border-slate-100 px-3 py-3 text-xs text-muted-foreground">{summary || "—"}</td>
+                        <td className="border-b border-slate-100 px-3 py-3 text-xs text-muted-foreground">{main ? `${comp}本期以${displayLabel(main.dimension)}维度变化最明显。` : "—"}</td>
+                      </tr>
                     ))}
-                  </article>
-                ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
