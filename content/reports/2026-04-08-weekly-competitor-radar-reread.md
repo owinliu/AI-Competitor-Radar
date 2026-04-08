@@ -645,8 +645,8 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 我的页1
-    conclusion: 我的页1最新周期缺图，无法跨期判断。
-    compare: 仅有0323，需补拍0407同位点。
+    conclusion: 0407该位点与0323首页形态接近，存在页面命名映射变化，需按位点复核。
+    compare: 对照窗口：0323我的页1 vs 0407样本，顶部结构与底部导航出现跨页映射信号。
     impact: 中
     confidence: 是（建议人工复核）
     actions:
@@ -663,10 +663,10 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 我的页2
-    conclusion: 我的页2最新周期缺图，无法跨期判断。
-    compare: 仅有0323，需补拍0407同位点。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 我的页2结构整体稳定，主要为内容位轻微更新。
+    compare: 对照窗口：0323 vs 0407，入口布局未见明显变更。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -681,10 +681,10 @@ insights:
     dimension: APP
     period: 2026-W15
     page: 首页
-    conclusion: 首页最新周期缺图，无法跨期判断。
-    compare: 仅有0323，需补拍0407同位点。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 首页信息架构发生明显调整：从借款主卡首屏转为社区/内容+借款并列形态。
+    compare: 对照窗口：0323 vs 0407，首屏模块顺序与核心展示重心均变化。
+    impact: 高
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -699,10 +699,10 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: ai客服
-    conclusion: ai客服客服入口与会话展示存在变化信号。
-    compare: 对照窗口：0323 vs 0407，建议人工复核状态差异。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: AI客服页面结构基本一致，未见关键路径变化。
+    compare: 对照窗口：0323 vs 0407，主会话入口与操作位保持稳定。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -717,10 +717,10 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 对话框1
-    conclusion: 对话框1客服入口与会话展示存在变化信号。
-    compare: 对照窗口：0323 vs 0407，建议人工复核状态差异。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 对话框1整体结构稳定，问题池内容有小幅迭代。
+    compare: 对照窗口：0323 vs 0407，布局一致，文案级更新。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -735,10 +735,10 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 对话框2
-    conclusion: 对话框2客服入口与会话展示存在变化信号。
-    compare: 对照窗口：0323 vs 0407，建议人工复核状态差异。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 对话框2结构稳定，未见明显新增流程。
+    compare: 对照窗口：0323 vs 0407，保持同构。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -753,10 +753,10 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 对话框3
-    conclusion: 对话框3客服入口与会话展示存在变化信号。
-    compare: 对照窗口：0323 vs 0407，建议人工复核状态差异。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 对话框3结构稳定，交互路径一致。
+    compare: 对照窗口：0323 vs 0407，主要为内容细调。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -771,10 +771,10 @@ insights:
     dimension: 客服
     period: 2026-W15
     page: 消息页
-    conclusion: 消息页客服入口与会话展示存在变化信号。
-    compare: 对照窗口：0323 vs 0407，建议人工复核状态差异。
-    impact: 中
-    confidence: 是（建议人工复核）
+    conclusion: 消息页分区稳定，消息内容更新但结构无显著变化。
+    compare: 对照窗口：0323 vs 0407，页面框架一致。
+    impact: 低
+    confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
     prevEvidence:
@@ -789,9 +789,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 人脸识别
-    conclusion: 人脸识别主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 人脸识别流程页稳定，步骤与入口无显著变化。
+    compare: 对照窗口：0323 vs 0407，流程结构一致。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -807,9 +807,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 借钱
-    conclusion: 借钱主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 借钱页核心结构稳定，额度与按钮路径保持一致。
+    compare: 对照窗口：0323 vs 0407，未见关键结构变化。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -825,9 +825,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 挽留
-    conclusion: 挽留主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 挽留页策略延续，版式与主操作位一致。
+    compare: 对照窗口：0323 vs 0407，内容文案轻微调整。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -843,9 +843,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 账单助手
-    conclusion: 账单助手主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 账单助手结构稳定，功能入口未见重构。
+    compare: 对照窗口：0323 vs 0407，保持同构。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -861,9 +861,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 额度成长
-    conclusion: 额度成长主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 额度成长页结构稳定，成长任务内容迭代。
+    compare: 对照窗口：0323 vs 0407，流程未改。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -879,9 +879,9 @@ insights:
     dimension: 消金
     period: 2026-W15
     page: 额度提示
-    conclusion: 额度提示主链路总体稳定，局部信息层有更新。
-    compare: 对照窗口：0323 vs 0407，结构稳定。
-    impact: 中
+    conclusion: 额度提示页结构稳定，提示文案有细微变化。
+    compare: 对照窗口：0323 vs 0407，操作路径一致。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -897,9 +897,9 @@ insights:
     dimension: 留存促活运营
     period: 2026-W15
     page: 优惠券页
-    conclusion: 优惠券页运营活动位有明显新增或强化。
-    compare: 对照窗口：0323 vs 0407，活动触达更活跃。
-    impact: 高
+    conclusion: 优惠券页活动位延续，未见结构层明显新增。
+    compare: 对照窗口：0323 vs 0407，券面内容更新为主。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -915,9 +915,9 @@ insights:
     dimension: 留存促活运营
     period: 2026-W15
     page: 额度成长1
-    conclusion: 额度成长1运营活动位有明显新增或强化。
-    compare: 对照窗口：0323 vs 0407，活动触达更活跃。
-    impact: 高
+    conclusion: 额度成长活动页整体稳定，激励文案轻微迭代。
+    compare: 对照窗口：0323 vs 0407，结构无显著变化。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
@@ -933,9 +933,9 @@ insights:
     dimension: 留存促活运营
     period: 2026-W15
     page: 额度成长2
-    conclusion: 额度成长2运营活动位有明显新增或强化。
-    compare: 对照窗口：0323 vs 0407，活动触达更活跃。
-    impact: 高
+    conclusion: 额度成长2页面结构稳定，活动素材更新。
+    compare: 对照窗口：0323 vs 0407，布局与主按钮一致。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。
