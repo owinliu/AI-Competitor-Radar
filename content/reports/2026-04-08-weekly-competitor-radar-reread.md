@@ -573,9 +573,9 @@ insights:
     dimension: 留存促活运营
     period: 2026-W15
     page: 借钱折扣
-    conclusion: 借钱折扣位点两期已对齐，活动权益表达延续并有轻微强化。
-    compare: 对照窗口：0323 vs 0407，活动主框架一致，文案与奖励提示轻度增强。
-    impact: 中
+    conclusion: 两期借钱折扣弹窗核心结构一致，未发生显著机制变化。
+    compare: 对照窗口：0323 vs 0407，主视觉、奖励入口与主按钮保持一致，仅文案细节微调。
+    impact: 低
     confidence: 否
     actions:
       - 按同位点持续追踪，缺口优先补拍。

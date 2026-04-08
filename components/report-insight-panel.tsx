@@ -21,6 +21,17 @@ function group(title: string, arr: string[], value: string, onChange: (v: string
   );
 }
 
+function hasStructuralChange(text: string) {
+  return /入口|布局|层级|主操作|主链路|路径|结构|改版|切换/.test(text);
+}
+
+function experienceText(compare: string, impact: "高" | "中" | "低") {
+  if (!hasStructuralChange(compare) && impact === "低") return "用户主路径基本不变，感知为延续性更新。";
+  if (!hasStructuralChange(compare) && impact === "中") return "用户主路径变化有限，感知为局部优化。";
+  if (impact === "高") return "用户决策入口或操作路径发生明显变化。";
+  return "用户感知有一定变化，但整体学习成本可控。";
+}
+
 type ViewerImage = { src: string; label: string };
 
 export default function ReportInsightPanel({ insights }: { insights: Insight[] }) {
@@ -59,10 +70,11 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     if (period !== "全部" && x.period !== period) return false;
     if (changeScope === "显著变化") {
       const text = `${x.conclusion}${x.compare || ""}`;
-      const isSmall = /变化不大|基本一致|整体稳定|省略详细过程|主链路稳定/.test(text);
-      const isStrongSignal = /显著|明显|新增|强化|增强|加码/.test(text);
+      const isSmall = /变化不大|基本一致|整体稳定|省略详细过程|主链路稳定|未见关键路径变化/.test(text);
+      const structural = hasStructuralChange(text);
       if (isSmall) return false;
-      if (!(x.impact === "高" || isStrongSignal)) return false;
+      // 规则调整：显著变化必须满足“高影响 + 结构层变化”，避免仅凭活动文案误判
+      if (!(x.impact === "高" && structural)) return false;
     }
     return true;
   }), [insights, competitor, dimension, period, changeScope]);
@@ -183,8 +195,9 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                           </div>
 
                           <div className="space-y-1 text-xs text-muted-foreground min-w-0">
-                            <p className="line-clamp-3"><span className="font-medium text-foreground">事实：</span>{x.conclusion || "-"}</p>
-                            <p className="line-clamp-3"><span className="font-medium text-foreground">体验：</span>{x.compare || "变化不大，省略详细过程"}</p>
+                            <p className="line-clamp-3"><span className="font-medium text-foreground">1）截图变化：</span>{x.compare || "两期截图差异较小。"}</p>
+                            <p className="line-clamp-3"><span className="font-medium text-foreground">2）事实：</span>{x.conclusion || "-"}</p>
+                            <p className="line-clamp-3"><span className="font-medium text-foreground">3）体验：</span>{experienceText(x.compare || "", x.impact)}</p>
                           </div>
                         </div>
                       </article>
