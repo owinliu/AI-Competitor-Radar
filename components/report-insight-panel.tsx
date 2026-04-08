@@ -162,9 +162,8 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
                         {byCompetitor.map(({ competitor: c, hit }) => (
                           <td key={`${dim}-${c}`} className="border-b border-slate-100 px-3 py-3 align-top">
                             {hit ? (
-                              <div className="space-y-1">
-                                <span className={`inline-block rounded px-2 py-0.5 text-xs ${impactChipClass(hit.impact)}`}>{hit.impact}</span>
-                                <p className="text-xs text-muted-foreground line-clamp-2">{hit.conclusion}</p>
+                              <div className={`space-y-1 text-xs ${impactTextClass(hit.impact)}`}>
+                                <p className="line-clamp-2">{hit.conclusion}</p>
                               </div>
                             ) : <span className="text-xs text-muted-foreground">—</span>}
                           </td>
