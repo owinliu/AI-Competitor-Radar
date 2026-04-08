@@ -22,7 +22,14 @@ function group(title: string, arr: string[], value: string, onChange: (v: string
 }
 
 function hasStructuralChange(text: string) {
-  return /入口|布局|层级|主操作|主链路|路径|结构|改版|切换/.test(text);
+  return /入口|布局|层级|主操作|主链路|路径|结构|改版|切换|新增|强化|调整/.test(text);
+}
+
+function hasSignificantStructuralChange(conclusion: string, compare: string) {
+  const text = `${conclusion}${compare}`;
+  const isSmall = /变化不大|基本一致|整体稳定|省略详细过程|主链路稳定|未见关键路径变化|轻微|小幅/.test(text);
+  const hasSignal = /新增|切换|改版|强化|调整|变化|替换|升级/.test(text);
+  return !isSmall && hasStructuralChange(text) && hasSignal;
 }
 
 function experienceText(compare: string, impact: "高" | "中" | "低") {
@@ -69,12 +76,8 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     if (dimension !== "全部" && x.dimension !== dimension) return false;
     if (period !== "全部" && x.period !== period) return false;
     if (changeScope === "显著变化") {
-      const text = `${x.conclusion}${x.compare || ""}`;
-      const isSmall = /变化不大|基本一致|整体稳定|省略详细过程|主链路稳定|未见关键路径变化/.test(text);
-      const structural = hasStructuralChange(text);
-      if (isSmall) return false;
-      // 规则调整：显著变化必须满足“高影响 + 结构层变化”，避免仅凭活动文案误判
-      if (!(x.impact === "高" && structural)) return false;
+      // 新规则：不看历史高影响标签，仅按截图对比中的“结构层变化信号”筛选
+      if (!hasSignificantStructuralChange(x.conclusion || "", x.compare || "")) return false;
     }
     return true;
   }), [insights, competitor, dimension, period, changeScope]);
@@ -147,7 +150,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
     <>
       <section className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-semibold">单产品阶段更新（含对比图）</h2>
+          <h2 className="text-lg font-semibold">单产品结构变化页（按截图对比）</h2>
           <div className="flex flex-wrap gap-2">
             {stageTabs.map((x) => (
               <Button key={x} size="sm" variant={x === stageCompetitor ? "default" : "outline"} onClick={() => setStageCompetitor(x)}>{x}</Button>
@@ -156,7 +159,7 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
         </div>
 
         {stageInsights.length === 0 ? (
-          <p className="text-sm text-muted-foreground">当前筛选下暂无该竞品的阶段更新。</p>
+          <p className="text-sm text-muted-foreground">当前筛选下暂无结构层明显变化页面。</p>
         ) : (
           <div className="space-y-5">
             {stageInsights.map(({ dimension: dim, rows }) => (
