@@ -86,52 +86,6 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
       .filter((x) => x.rows.length > 0);
   }, [filtered, stageCompetitor]);
 
-  const dimensionSummaries = useMemo(() => {
-    const byDim = new Map<string, typeof filtered>();
-    for (const d of dimensionOrder) byDim.set(d, [] as any);
-    for (const item of filtered) {
-      const arr = byDim.get(item.dimension) || [];
-      arr.push(item as any);
-      byDim.set(item.dimension, arr as any);
-    }
-
-    const pickIssue = (arr: typeof filtered) => {
-      if (!arr.length) return "暂无数据";
-      return arr[0].conclusion.replace(/。$/, "");
-    };
-
-    const targetDims = dimension === "全部" ? dimensionOrder : [dimension];
-
-    return targetDims.map((d) => {
-      const arr = (byDim.get(d) || []) as typeof filtered;
-      if (!arr.length) {
-        return { dim: d, text: `${displayLabel(d)}：暂无数据，当前无法判断该维度变化。` };
-      }
-
-      if (competitor === "全部") {
-        const fql = arr.filter((x) => x.competitor === "分期乐");
-        const dxm = arr.filter((x) => x.competitor === "度小满");
-        const fqlTxt = pickIssue(fql);
-        const dxmTxt = pickIssue(dxm);
-        return {
-          dim: d,
-          text: `${displayLabel(d)}：分期乐（${fqlTxt}）；度小满（${dxmTxt}）。`,
-        };
-      }
-
-      const keyIssues = arr
-        .slice(0, 2)
-        .map((x) => x.conclusion.replace(/。$/, ""))
-        .join("；");
-      const hasReview = arr.some((x) => `${x.confidence}`.includes("是"));
-      const reviewText = hasReview ? "；其中部分结论建议人工复核。" : "。";
-      return {
-        dim: d,
-        text: `${displayLabel(d)}：${keyIssues}${reviewText}`,
-      };
-    });
-  }, [filtered, competitor, dimension]);
-
   const openViewer = (images: ViewerImage[], idx: number) => {
     if (images.length === 0) return;
     setViewerImages(images);
@@ -220,14 +174,6 @@ export default function ReportInsightPanel({ insights }: { insights: Insight[] }
           </div>
         </div>
 
-        <div className="rounded-lg border bg-muted/30 p-3 text-sm space-y-2">
-          <p className="mb-1 text-sm font-medium">按维度总结（APP / 客服 / 消金 / 运营 / 风控）</p>
-          <ul className="list-disc space-y-1 pl-5 text-sm">
-            {dimensionSummaries.map((s) => (
-              <li key={s.dim}>{s.text}</li>
-            ))}
-          </ul>
-        </div>
 
         <div className="overflow-x-auto rounded-lg border">
           <table className="w-full min-w-[1200px] border-collapse text-sm">
