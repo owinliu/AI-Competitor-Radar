@@ -8,29 +8,32 @@ const rows = [
     pricing: "明确披露‘年利率低至8%起、新人最长30天免息’",
     cta: "扫码下载、借款入口、客服触点并行，导向下载与转化",
     trust: "ISO认证、0数据泄露纪录、百家银行合作与品牌荣誉",
-    status: "已抓取"
+    status: "已上传截图",
+    screenshot: "/brand-screenshots/fenqile.jpg"
   },
   {
     brand: "奇富借条（360借条）",
     site: "https://www.360jie.com",
-    positioning: "主打大平台风控与便捷借款（本轮自动抓取受限）",
-    heroCopy: "待补抓",
-    featureShowcase: "待补抓",
-    pricing: "待补抓",
-    cta: "待补抓",
-    trust: "待补抓",
-    status: "官网反爬限制，待人工补抓"
+    positioning: "主打大平台风控与便捷借款",
+    heroCopy: "首页首屏信息（已截图，可视化核对）",
+    featureShowcase: "建议结合截图复核具体模块",
+    pricing: "建议结合截图复核",
+    cta: "建议结合截图复核",
+    trust: "建议结合截图复核",
+    status: "已上传截图",
+    screenshot: "/brand-screenshots/qifu.jpg"
   },
   {
     brand: "安逸花",
     site: "https://www.anyihua.com",
-    positioning: "主打普惠借款与便捷服务（本轮自动抓取受限）",
-    heroCopy: "待补抓",
-    featureShowcase: "待补抓",
-    pricing: "待补抓",
-    cta: "待补抓",
-    trust: "待补抓",
-    status: "官网反爬限制，待人工补抓"
+    positioning: "主打普惠借款与便捷服务",
+    heroCopy: "首页首屏信息（已截图，可视化核对）",
+    featureShowcase: "建议结合截图复核具体模块",
+    pricing: "建议结合截图复核",
+    cta: "建议结合截图复核",
+    trust: "建议结合截图复核",
+    status: "已上传截图",
+    screenshot: "/brand-screenshots/anyihua.jpg"
   },
   {
     brand: "小赢",
@@ -41,7 +44,8 @@ const rows = [
     pricing: "首页未见强定价露出，偏品牌与机构背书路径",
     cta: "客服热线 952592 + 内容入口，转化偏‘咨询型’",
     trust: "纽交所上市公司背景、投诉热线与公开备案信息",
-    status: "已抓取"
+    status: "已上传截图",
+    screenshot: "/brand-screenshots/xiaoying.jpg"
   },
   {
     brand: "度小满",
@@ -52,7 +56,8 @@ const rows = [
     pricing: "首页以能力与生态叙事为主，定价信息不前置",
     cta: "在线客服、下载、登录等多入口，偏平台化分流",
     trust: "合作金融机构规模、CSR叙事、资质备案与联系方式完备",
-    status: "已抓取"
+    status: "已上传截图",
+    screenshot: "/brand-screenshots/duxiaoman.jpg"
   }
 ];
 
@@ -65,7 +70,7 @@ export default function BrandStrategyPage() {
           对比对象：分期乐、奇富借条、安逸花、小赢、度小满。维度覆盖：品牌定位、首屏文案、功能展示、定价策略、CTA 转化、信任背书。
         </p>
         <p className="mt-1 text-xs text-muted-foreground">
-          数据来源：官网首页自动访问与页面结构抓取（本轮抓取时间：2026-04-09）。
+          数据来源：官网首页自动访问与页面截图（本轮抓取时间：2026-04-09）。
         </p>
       </section>
 
@@ -106,12 +111,26 @@ export default function BrandStrategyPage() {
       </section>
 
       <section className="rounded-xl border bg-card p-6">
+        <h2 className="text-lg font-semibold">官网截图（5个产品）</h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {rows.map((r) => (
+            <figure key={`${r.brand}-shot`} className="overflow-hidden rounded-lg border bg-background">
+              <img src={r.screenshot} alt={`${r.brand} 官网截图`} className="w-full object-cover" />
+              <figcaption className="border-t px-3 py-2 text-xs text-muted-foreground">
+                {r.brand} · {r.site}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-xl border bg-card p-6">
         <h2 className="text-lg font-semibold">本轮关键结论（先给可行动结论）</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
           <li>分期乐在“价格与效率”信息上最前置，属于强转化导向官网结构。</li>
           <li>度小满以“平台能力 + 生态合作”叙事为主，偏 B 端可信度与综合品牌势能。</li>
           <li>小赢首页更偏品牌与资讯承接，产品卖点与价格信息前置程度较低。</li>
-          <li>奇富借条、安逸花本轮受反爬限制，建议补充人工截图后完成最终对照评分。</li>
+          <li>奇富借条、安逸花已补上官网截图，建议你下一步按截图做最终口径复核。</li>
         </ul>
       </section>
     </div>
