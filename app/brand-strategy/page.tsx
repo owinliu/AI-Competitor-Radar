@@ -62,6 +62,8 @@ const rows = [
 ];
 
 export default function BrandStrategyPage() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <div className="space-y-6">
       <section className="rounded-xl border bg-card p-6">
@@ -115,7 +117,7 @@ export default function BrandStrategyPage() {
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {rows.map((r) => (
             <figure key={`${r.brand}-shot`} className="overflow-hidden rounded-lg border bg-background">
-              <img src={r.screenshot} alt={`${r.brand} 官网截图`} className="w-full object-cover" />
+              <img src={`${basePath}${r.screenshot}`} alt={`${r.brand} 官网截图`} className="w-full object-cover" />
               <figcaption className="border-t px-3 py-2 text-xs text-muted-foreground">
                 {r.brand} · {r.site}
               </figcaption>
